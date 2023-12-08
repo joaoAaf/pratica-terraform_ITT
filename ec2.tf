@@ -1,4 +1,4 @@
-resource "aws_instance" "ativ-pratica-tf" {
+resource "aws_instance" "ec2-pratica-tf" {
   count                  = 2
   ami                    = "ami-0fc5d935ebf8bc3bc"
   instance_type          = "t2.micro"
@@ -20,7 +20,11 @@ resource "aws_instance" "ativ-pratica-tf" {
   connection {
     type = "ssh"
     user = "ubuntu"
-    private_key = file("/home/$USER/.ssh/itt-keys.pem")
+    private_key = file("~/.ssh/itt-keys.pem")
     host = self.public_ip
   }
+}
+
+output "ec2-pratica-tf" {
+  value = aws_instance.ec2-pratica-tf[0].public_dns
 }
