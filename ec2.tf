@@ -9,7 +9,7 @@ resource "aws_instance" "ec2-pratica-tf" {
   }
   provisioner "file" {
     source = "configNginx.sh"
-    destination = "/tmp/"
+    destination = "/tmp/configNginx.sh"
   }
   provisioner "remote-exec" {
     inline = [ 
@@ -24,7 +24,6 @@ resource "aws_instance" "ec2-pratica-tf" {
     host = self.public_ip
   }
 }
-
 output "ec2-pratica-tf" {
   value = aws_instance.ec2-pratica-tf[0].public_dns
 }
